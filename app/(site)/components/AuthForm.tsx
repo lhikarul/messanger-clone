@@ -9,6 +9,7 @@ import Button from "@/app/components/Button";
 import Input from "@/app/components/inputs/Input";
 
 import AuthSocialButton from "./AuthSocialButton";
+import axios from "axios";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -39,6 +40,7 @@ export default function AuthForm() {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     if (variant === "REGISTER") {
+      axios.post("/api/register", data);
     }
     if (variant === "LOGIN") {
     }
