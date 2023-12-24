@@ -3,19 +3,20 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 
 interface IParams {
-  conversationid?: string;
+  conversationId?: string;
 }
 
 export async function POST(request: Request, { params }: { params: IParams }) {
   try {
     const currentUser = await getCurrentUser();
-    const { conversationid } = params;
+    const { conversationId } = params;
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
     const conversation = await prisma.conversation.findUnique({
       where: {
-        id: conversationid,
+        id: conversationId,
       },
       include: {
         messages: {
